@@ -36,4 +36,11 @@ final List<TableStyle> tableStyles = [
     usage: 'Business presentations, marketing materials, and executive summaries.',
     type: TableType.colorfulHeader,
   ),
+  const TableStyle(
+    id: '6',
+    name: 'Modern Minimalist',
+    description: 'No borders, just generous spacing and subtle alignment. Relies on whitespace to separate data.',
+    usage: 'Design-heavy documents, portfolios, and clean aesthetic reports.',
+    type: TableType.modernMinimalist,
+  ),
 ];

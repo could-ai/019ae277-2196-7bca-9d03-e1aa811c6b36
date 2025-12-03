@@ -19,6 +19,8 @@ class WordTableRenderer extends StatelessWidget {
         return _buildListTable();
       case TableType.colorfulHeader:
         return _buildColorfulHeaderTable(context);
+      case TableType.modernMinimalist:
+        return _buildModernMinimalist(context);
       default:
         return _buildSimpleGrid();
     }
@@ -112,6 +114,25 @@ class WordTableRenderer extends StatelessWidget {
     );
   }
 
+  // 6. Modern Minimalist
+  Widget _buildModernMinimalist(BuildContext context) {
+    return Table(
+      border: TableBorder.all(style: BorderStyle.none),
+      children: [
+        TableRow(
+          children: [
+            _buildCell('PROJECT', isHeader: true, textColor: Colors.grey.shade600),
+            _buildCell('CLIENT', isHeader: true, textColor: Colors.grey.shade600),
+            _buildCell('YEAR', isHeader: true, textColor: Colors.grey.shade600),
+          ],
+        ),
+        _buildRow(['Rebrand', 'Acme Corp', '2023']),
+        _buildRow(['Website', 'Globex', '2024']),
+        _buildRow(['App', 'Soylent', '2024']),
+      ],
+    );
+  }
+
   TableRow _buildRow(List<String> cells, {bool isHeader = false, Color? color}) {
     return TableRow(
       decoration: color != null ? BoxDecoration(color: color) : null,
@@ -126,7 +147,7 @@ class WordTableRenderer extends StatelessWidget {
         text,
         style: TextStyle(
           fontWeight: isHeader ? FontWeight.bold : FontWeight.normal,
-          fontSize: isHeader ? 14 : 14,
+          fontSize: 14,
           color: textColor ?? Colors.black87,
         ),
         textAlign: TextAlign.left,

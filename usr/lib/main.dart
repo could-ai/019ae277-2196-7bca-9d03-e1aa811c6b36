@@ -14,11 +14,14 @@ class MyApp extends StatelessWidget {
       title: 'Word Table Formats',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        // Using Microsoft Word's iconic blue as the seed color
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2B579A)),
         useMaterial3: true,
         appBarTheme: const AppBarTheme(
           centerTitle: true,
           elevation: 0,
+          foregroundColor: Colors.white,
+          backgroundColor: Color(0xFF2B579A),
         ),
       ),
       initialRoute: '/',

@@ -21,4 +21,5 @@ enum TableType {
   professionalReport,
   bandedRows,
   colorfulHeader,
+  modernMinimalist, // Added new type
 }

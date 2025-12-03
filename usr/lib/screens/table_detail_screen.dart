@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../models/table_style.dart';
 import '../widgets/word_table_renderer.dart';
 
@@ -12,6 +13,13 @@ class TableDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(style.name),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          _copyInstructions(context);
+        },
+        icon: const Icon(Icons.copy),
+        label: const Text('Copy Steps'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -93,7 +101,30 @@ class TableDetailScreen extends StatelessWidget {
             _buildInstructionStep(1, 'Insert a table with your desired dimensions.'),
             _buildInstructionStep(2, _getSpecificInstruction(style.type)),
             _buildInstructionStep(3, 'Adjust column widths to fit content.'),
+            
+            // Extra padding for FAB
+            const SizedBox(height: 80),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _copyInstructions(BuildContext context) {
+    final instructions = '''
+How to create ${style.name} in Word:
+1. Insert a table with your desired dimensions.
+2. ${_getSpecificInstruction(style.type)}
+3. Adjust column widths to fit content.
+''';
+    Clipboard.setData(ClipboardData(text: instructions));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Instructions copied to clipboard!'),
+        behavior: SnackBarBehavior.floating,
+        action: SnackBarAction(
+          label: 'OK',
+          onPressed: () {},
         ),
       ),
     );
@@ -145,6 +176,8 @@ class TableDetailScreen extends StatelessWidget {
         return 'Remove vertical borders. Keep only horizontal borders between rows for a clean list look.';
       case TableType.colorfulHeader:
         return 'Select the top row, go to Shading, and pick a dark color. Change font color to white for contrast.';
+      case TableType.modernMinimalist:
+        return 'Remove all borders. Use generous cell padding and bold text for headers to create separation without lines.';
       default:
         return 'Apply standard formatting.';
     }
